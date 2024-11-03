@@ -1,0 +1,63 @@
+set instance b1 box
+set instance b2 box
+set instance b3 box
+set instance b4 box
+set instance b5 box
+set instance l1 location
+set instance l2 location
+set instance depot location
+set instance p1 person
+set instance p2 person
+set instance p3 person
+set instance food content
+set instance medicine content
+set instance a agent
+set instance ca carrier
+set instance bp1 box_place
+set instance bp2 box_place
+set instance bp3 box_place
+set instance bp4 box_place
+
+set function (= (content_weight food) 2)
+set function (= (content_weight medicine) 1)
+set function (= (carrier_weight ca) 1)
+
+set predicate (is_idle a)
+set predicate (at a depot)
+set predicate (at ca depot)
+set predicate (at p1 l1)
+set predicate (at p2 l1)
+set predicate (at p3 l2)
+
+set predicate (is_depot depot)
+
+set predicate (is_empty b1)
+set predicate (is_empty b2)
+set predicate (is_empty b3)
+set predicate (is_empty b4)
+set predicate (is_empty b5)
+
+set predicate (is_not_loaded b1)
+set predicate (is_not_loaded b2)
+set predicate (is_not_loaded b3)
+set predicate (is_not_loaded b4)
+set predicate (is_not_loaded b5)
+
+set predicate (needs_content p1 food)
+set predicate (needs_content p1 medicine)
+set predicate (needs_content p2 medicine)
+set predicate (needs_content p3 food)
+
+set predicate (is_free bp1)
+set predicate (is_free bp2)
+set predicate (is_free bp3)
+set predicate (is_free bp4)
+
+set predicate (box_place_belongs_to_carrier bp1 ca)
+set predicate (box_place_belongs_to_carrier bp2 ca)
+set predicate (box_place_belongs_to_carrier bp3 ca)
+set predicate (box_place_belongs_to_carrier bp4 ca)
+
+set goal (and (is_satisfied p1 food)(is_satisfied p1 medicine)(is_satisfied p2 medicine)(is_satisfied p3 food))
+
+run plan-file myplan.txt
